@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Cyberpunk2077-DevinsPatcher")]
+[assembly: AssemblyTitle("Cyberpunk 2077 Performance Patcher")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Cyberpunk2077-DevinsPatcher")]
+[assembly: AssemblyProduct("Cyberpunk2077-PerformancePatcher")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Cyberpunk2077_DevinsPatcher
+namespace Cyberpunk2077_PerformancePatcher
 {
     static class Program
     {
