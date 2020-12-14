@@ -217,6 +217,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.Controls.Add(this.infoText);
             this.Controls.Add(this.browseTextbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(425, 450);
             this.MinimumSize = new System.Drawing.Size(425, 450);
