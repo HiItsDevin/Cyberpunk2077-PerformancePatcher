@@ -120,6 +120,9 @@
   <data name="MemoryPoolPatcherText.Text" xml:space="preserve">
     <value>Increases the PoolCPU and PoolGPU in the game's config for better performance. Sets to Half your System RAM instead of the Default 1.5GB for PoolGPU, and Sets to all your VRAM instead of half your VRAM for PoolGPU.</value>
   </data>
+  <metadata name="devMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

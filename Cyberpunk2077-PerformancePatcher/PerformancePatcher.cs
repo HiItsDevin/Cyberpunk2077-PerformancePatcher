@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security;
 using System.Windows.Forms;
+using System.Drawing;
 using CPUInformation;
 
 
@@ -10,22 +11,46 @@ namespace Cyberpunk2077_PerformancePatcher
 {
     public partial class PerformancePatcherForm : Form
     {
+        string CPUManufacturer = "unknown";
         public PerformancePatcherForm()
         {
             InitializeComponent();
+
             if (CPUinfo.GetCpuManufacturer() == "AuthenticAMD")
             {
+                statusMessage.ForeColor = Color.Red;
                 statusMessage.Text = "We've detected an AMD CPU.";
+                
             }
             else if(CPUinfo.GetCpuManufacturer() == "GenuineIntel")
             {
+                statusMessage.ForeColor = Color.Blue;
                 statusMessage.Text = "We've detected an Intel CPU.";
             }
             else
             {
+                statusMessage.ForeColor = Color.DarkRed;
                 statusMessage.Text = "Unknown CPU! What are you running this on? :o";
             }
+            CPUManufacturer = CPUinfo.GetCpuManufacturer();
         }
+
+        /* Context Menu */
+
+        private void intelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CPUManufacturer = "GenuineIntel";
+            statusMessage.ForeColor = Color.Blue;
+            statusMessage.Text = "Now emulating Intel.";
+        }
+        private void AMDToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CPUManufacturer = "AuthenticAMD";
+            statusMessage.ForeColor = Color.Red;
+            statusMessage.Text = "Now emulating AMD.";
+        }
+
+        /* Context Menu End */
 
         private OpenFileDialog openFileDialog1;
 
@@ -44,11 +69,16 @@ namespace Cyberpunk2077_PerformancePatcher
                     var filePath = openFileDialog1.FileName;
                     browseTextbox.Text = filePath;
                     AMDpatchButton.Enabled = true;
+                    IntelPatchButton.Enabled = true;
+                    statusMessage.ForeColor = Color.DarkGreen;
+                    statusMessage.Text = "Selected Cyberpunk2077 executable.";
                 }
                 catch (SecurityException ex)
                 {
                     MessageBox.Show($"Security error.\n\nError message: {ex.Message}\n\n" +
                     $"Details:\n\n{ex.StackTrace}");
+                    statusMessage.ForeColor = Color.DarkRed;
+                    statusMessage.Text = $"Security error. {ex.Message}";
                 }
             }
         }
@@ -60,15 +90,30 @@ namespace Cyberpunk2077_PerformancePatcher
                 AMDpatchButton.Enabled = false;
                 try
                 {
-                    if(CPUinfo.GetCpuManufacturer() == "GenuineIntel") {
+                    if (CPUManufacturer == "GenuineIntel")
+                    {
                         DialogResult cpuQuestion = MessageBox.Show("We've detected an Intel CPU!\n\nAre you sure you want to continue patching? Performance may be worse.", "Intel CPU detected", MessageBoxButtons.YesNo);
-                        if(cpuQuestion == DialogResult.No)
+                        if (cpuQuestion == DialogResult.No)
                         {
+                            statusMessage.ForeColor = Color.DarkRed;
+                            statusMessage.Text = "Operation cancelled.";
+                            AMDpatchButton.Enabled = true;
+                            return;
+                        }
+                    }
+                    if ((CPUManufacturer == "GenuineIntel") && (int.Parse($"{CPUinfo.GetCpuCores()}") >= 12))
+                    {
+                        DialogResult cpuQuestion = MessageBox.Show("We've detected more than 12 cores!\n\nAre you sure you want to continue patching? Performance may be worse.", "More than 12 cores detected!", MessageBoxButtons.YesNo);
+                        if (cpuQuestion == DialogResult.No)
+                        {
+                            statusMessage.ForeColor = Color.DarkRed;
+                            statusMessage.Text = "Operation cancelled.";
                             AMDpatchButton.Enabled = true;
                             return;
                         }
                     }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, AMDPatchFind, AMDPatchReplace);
+                    statusMessage.ForeColor = Color.DarkGreen;
                     statusMessage.Text = "AMD patch completed successfully!";
                 }
                 catch (System.Security.Authentication.AuthenticationException)
@@ -82,7 +127,8 @@ namespace Cyberpunk2077_PerformancePatcher
                             File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp");
                         }
                     }
-                    statusMessage.Text = "Game was already patched.";
+                    statusMessage.ForeColor = Color.DarkRed;
+                    statusMessage.Text = "Game was already patched. Operation cancelled.";
                     return;
                 }
                 catch (Exception ex)
@@ -98,12 +144,15 @@ namespace Cyberpunk2077_PerformancePatcher
                     }
                     MessageBox.Show($"We were not able to patch your game with AMD Patcher. \nAny changes have been discarded.\n\nError message: {ex.Message}");
                     AMDpatchButton.Enabled = true;
+                    statusMessage.ForeColor = Color.DarkRed;
                     statusMessage.Text = "Patching failed!";
                 }
             }
             else
             {
                 MessageBox.Show("Please select your Cyberpunk2077.exe first!");
+                statusMessage.ForeColor = Color.DarkRed;
+                statusMessage.Text = "Select your Cyberpunk executable first!";
             }
         }
         private void IntelPatchButton_Click(object sender, EventArgs e)
@@ -113,16 +162,19 @@ namespace Cyberpunk2077_PerformancePatcher
                 IntelPatchButton.Enabled = false;
                 try
                 {
-                    if (CPUinfo.GetCpuManufacturer() == "AuthenticAMD")
+                    if (CPUManufacturer == "AuthenticAMD")
                     {
                         DialogResult cpuQuestion = MessageBox.Show("We've detected an AMD CPU!\n\nAre you sure you want to continue patching? This check doesn't do much on AMD.", "AMD CPU detected", MessageBoxButtons.YesNo);
                         if (cpuQuestion == DialogResult.No)
                         {
+                            statusMessage.ForeColor = Color.DarkRed;
+                            statusMessage.Text = "Operation cancelled.";
                             IntelPatchButton.Enabled = true;
                             return;
                         }
                     }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, IntelPatchFind, IntelPatchReplace);
+                    statusMessage.ForeColor = Color.DarkGreen;
                     statusMessage.Text = "Intel AVX patch completed successfully!";
                 }
                 catch (System.Security.Authentication.AuthenticationException)
@@ -136,6 +188,7 @@ namespace Cyberpunk2077_PerformancePatcher
                             File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp");
                         }
                     }
+                    statusMessage.ForeColor = Color.DarkRed;
                     statusMessage.Text = "Game was already patched.";
                     return;
                 }
@@ -152,12 +205,15 @@ namespace Cyberpunk2077_PerformancePatcher
                     }
                     MessageBox.Show($"We were not able to patch your game with AMD Patcher. \nAny changes have been discarded.\n\nError message: {ex.Message}");
                     IntelPatchButton.Enabled = true;
+                    statusMessage.ForeColor = Color.DarkRed;
                     statusMessage.Text = "Patching failed!";
                 }
             }
             else
             {
                 MessageBox.Show("Please select your Cyberpunk2077.exe first!");
+                statusMessage.ForeColor = Color.DarkRed;
+                statusMessage.Text = "Select your Cyberpunk executable first!";
             }
         }
 
