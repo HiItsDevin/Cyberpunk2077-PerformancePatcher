@@ -29,6 +29,7 @@ namespace Cyberpunk2077_PerformancePatcher
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PerformancePatcherForm));
             this.AMDpatchButton = new System.Windows.Forms.Button();
             this.browseTextbox = new System.Windows.Forms.TextBox();
@@ -45,9 +46,15 @@ namespace Cyberpunk2077_PerformancePatcher
             this.MemoryPoolPatcherText = new System.Windows.Forms.Label();
             this.MemoryPoolPatcherButton = new System.Windows.Forms.Button();
             this.statusMessage = new System.Windows.Forms.Label();
+            this.devMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.devToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cPUEmulationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.intelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aMDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AMDGroupBox.SuspendLayout();
             this.IntelAVXPatcherGroupBox.SuspendLayout();
             this.MemoryPoolPatcherGroupBox.SuspendLayout();
+            this.devMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // AMDpatchButton
@@ -122,7 +129,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             this.AMDGroupBox.Controls.Add(this.AMDPatcherText);
             this.AMDGroupBox.Controls.Add(this.AMDpatchButton);
-            this.AMDGroupBox.Location = new System.Drawing.Point(15, 117);
+            this.AMDGroupBox.Location = new System.Drawing.Point(15, 98);
             this.AMDGroupBox.Name = "AMDGroupBox";
             this.AMDGroupBox.Size = new System.Drawing.Size(382, 92);
             this.AMDGroupBox.TabIndex = 5;
@@ -133,7 +140,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             this.IntelAVXPatcherGroupBox.Controls.Add(this.IntelAVXPatcherText);
             this.IntelAVXPatcherGroupBox.Controls.Add(this.IntelPatchButton);
-            this.IntelAVXPatcherGroupBox.Location = new System.Drawing.Point(15, 215);
+            this.IntelAVXPatcherGroupBox.Location = new System.Drawing.Point(15, 196);
             this.IntelAVXPatcherGroupBox.Name = "IntelAVXPatcherGroupBox";
             this.IntelAVXPatcherGroupBox.Size = new System.Drawing.Size(382, 90);
             this.IntelAVXPatcherGroupBox.TabIndex = 5;
@@ -165,7 +172,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             this.MemoryPoolPatcherGroupBox.Controls.Add(this.MemoryPoolPatcherText);
             this.MemoryPoolPatcherGroupBox.Controls.Add(this.MemoryPoolPatcherButton);
-            this.MemoryPoolPatcherGroupBox.Location = new System.Drawing.Point(15, 311);
+            this.MemoryPoolPatcherGroupBox.Location = new System.Drawing.Point(15, 292);
             this.MemoryPoolPatcherGroupBox.Name = "MemoryPoolPatcherGroupBox";
             this.MemoryPoolPatcherGroupBox.Size = new System.Drawing.Size(382, 104);
             this.MemoryPoolPatcherGroupBox.TabIndex = 5;
@@ -194,13 +201,52 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             // statusMessage
             // 
-            this.statusMessage.Location = new System.Drawing.Point(15, 101);
+            this.statusMessage.Location = new System.Drawing.Point(15, 399);
             this.statusMessage.Name = "statusMessage";
             this.statusMessage.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.statusMessage.Size = new System.Drawing.Size(382, 13);
+            this.statusMessage.Size = new System.Drawing.Size(382, 23);
             this.statusMessage.TabIndex = 6;
             this.statusMessage.Text = "Generic Status Message";
-            this.statusMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.statusMessage.TextAlign = System.Drawing.ContentAlignment.BottomRight;
+            // 
+            // devMenu
+            // 
+            this.devMenu.AccessibleName = "devMenu";
+            this.devMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.devToolStripMenuItem});
+            this.devMenu.Name = "devMenu";
+            this.devMenu.Size = new System.Drawing.Size(181, 48);
+            // 
+            // devToolStripMenuItem
+            // 
+            this.devToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cPUEmulationToolStripMenuItem});
+            this.devToolStripMenuItem.Name = "devToolStripMenuItem";
+            this.devToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.devToolStripMenuItem.Text = "Development";
+            // 
+            // cPUEmulationToolStripMenuItem
+            // 
+            this.cPUEmulationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.intelToolStripMenuItem,
+            this.aMDToolStripMenuItem});
+            this.cPUEmulationToolStripMenuItem.Name = "cPUEmulationToolStripMenuItem";
+            this.cPUEmulationToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.cPUEmulationToolStripMenuItem.Text = "CPU emulation";
+            // 
+            // intelToolStripMenuItem
+            // 
+            this.intelToolStripMenuItem.Name = "intelToolStripMenuItem";
+            this.intelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.intelToolStripMenuItem.Text = "Intel";
+            this.intelToolStripMenuItem.Click += new System.EventHandler(this.intelToolStripMenuItem_Click);
+            // 
+            // aMDToolStripMenuItem
+            // 
+            this.aMDToolStripMenuItem.Name = "aMDToolStripMenuItem";
+            this.aMDToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aMDToolStripMenuItem.Text = "AMD";
+            this.aMDToolStripMenuItem.Click += new System.EventHandler(this.AMDToolStripMenuItem_Click);
             // 
             // PerformancePatcherForm
             // 
@@ -208,6 +254,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(409, 431);
+            this.ContextMenuStrip = this.devMenu;
             this.Controls.Add(this.statusMessage);
             this.Controls.Add(this.MemoryPoolPatcherGroupBox);
             this.Controls.Add(this.IntelAVXPatcherGroupBox);
@@ -227,6 +274,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.AMDGroupBox.ResumeLayout(false);
             this.IntelAVXPatcherGroupBox.ResumeLayout(false);
             this.MemoryPoolPatcherGroupBox.ResumeLayout(false);
+            this.devMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,6 +297,11 @@ namespace Cyberpunk2077_PerformancePatcher
         private System.Windows.Forms.Label MemoryPoolPatcherText;
         private System.Windows.Forms.Button MemoryPoolPatcherButton;
         private System.Windows.Forms.Label statusMessage;
+        private System.Windows.Forms.ContextMenuStrip devMenu;
+        private System.Windows.Forms.ToolStripMenuItem devToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cPUEmulationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem intelToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aMDToolStripMenuItem;
     }
 }
 

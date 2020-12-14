@@ -80,6 +80,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.MemoryPoolPatchButton.TabIndex = 2;
             this.MemoryPoolPatchButton.Text = "Patch";
             this.MemoryPoolPatchButton.UseVisualStyleBackColor = true;
+            this.MemoryPoolPatchButton.Click += new System.EventHandler(this.MemoryPoolPatchButton_Click);
             // 
             // MemoryPoolSelector
             // 

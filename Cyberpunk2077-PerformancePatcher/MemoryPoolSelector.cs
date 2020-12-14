@@ -16,5 +16,10 @@ namespace Cyberpunk2077_PerformancePatcher
         {
             InitializeComponent();
         }
+
+        private void MemoryPoolPatchButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
