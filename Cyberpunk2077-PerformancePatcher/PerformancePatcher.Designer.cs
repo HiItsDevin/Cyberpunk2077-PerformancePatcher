@@ -193,11 +193,10 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             // statusMessage
             // 
-            this.statusMessage.AutoSize = true;
-            this.statusMessage.Location = new System.Drawing.Point(142, 101);
+            this.statusMessage.Location = new System.Drawing.Point(15, 101);
             this.statusMessage.Name = "statusMessage";
             this.statusMessage.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.statusMessage.Size = new System.Drawing.Size(123, 13);
+            this.statusMessage.Size = new System.Drawing.Size(382, 13);
             this.statusMessage.TabIndex = 6;
             this.statusMessage.Text = "Generic Status Message";
             this.statusMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
