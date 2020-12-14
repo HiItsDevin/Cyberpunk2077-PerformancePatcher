@@ -47,7 +47,7 @@ namespace Cyberpunk2077_PerformancePatcher
                 AMDpatchButton.Enabled = false;
                 try
                 {
-                    AMDPatchFile(openFileDialog1.FileName, openFileDialog1.FileName);
+                    PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, AMDPatchFind, AMDPatchReplace);
                 }
                 catch (Exception ex)
                 {
@@ -76,7 +76,7 @@ namespace Cyberpunk2077_PerformancePatcher
                 IntelPatchButton.Enabled = false;
                 try
                 {
-                    IntelPatchFile(openFileDialog1.FileName, openFileDialog1.FileName);
+                    PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, IntelPatchFind, IntelPatchReplace);
                 }
                 catch (Exception ex)
                 {
@@ -103,81 +103,23 @@ namespace Cyberpunk2077_PerformancePatcher
         // AMD Patcher Hex
         private static readonly byte[] AMDPatchFind = { 0x75, 0x30, 0x33, 0xC9, 0xB8, 0x01, 0x00, 0x00, 0x00, 0x0F, 0xA2, 0x8B, 0xC8, 0xC1, 0xF9, 0x08 };
         private static readonly byte[] AMDPatchReplace = { 0xEB, 0x30, 0x33, 0xC9, 0xB8, 0x01, 0x00, 0x00, 0x00, 0x0F, 0xA2, 0x8B, 0xC8, 0xC1, 0xF9, 0x08 };
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool AMDDetectPatch(byte[] sequence, int position)
-        {
-            if (position + AMDPatchFind.Length > sequence.Length) return false;
-            for (int p = 0; p < AMDPatchFind.Length; p++)
-            {
-                if (AMDPatchFind[p] != sequence[position + p]) return false;
-            }
-            return true;
-        }
-
-        //AMD Patching
-        private static void AMDPatchFile(string originalFile, string patchedFile)
-        {
-            // Ensure target directory exists.
-            var targetDirectory = Path.GetDirectoryName(patchedFile);
-            if (targetDirectory == null) return;
-            Directory.CreateDirectory(targetDirectory);
-
-            // Read file bytes.
-            byte[] fileContent = File.ReadAllBytes(originalFile);
-
-            // Detect and patch file.
-            bool foundPatch = false;
-            for (int p = 0; p < fileContent.Length; p++)
-            {
-                if (!AMDDetectPatch(fileContent, p)) continue;
-                foundPatch = true;
-                for (int w = 0; w < AMDPatchFind.Length; w++)
-                {
-                    fileContent[p + w] = AMDPatchReplace[w];
-                }
-            }
-
-            // Save it to another location.
-            if (!foundPatch)
-            {
-                MessageBox.Show("We couldn't patch your game. Perhaps you already ran the patcher?\n\nDouble check your path, and try again.");
-                return;
-            }
-            if (foundPatch)
-            {
-                string tmp = "null";
-                if (File.Exists($@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched"))
-                {
-                    File.Copy($@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched", $@"{System.IO.Path.GetDirectoryName(originalFile)}\cyber.tmp"); // Copy it to a temp file
-                    tmp = $@"{System.IO.Path.GetDirectoryName(originalFile)}\cyber.tmp";
-                    File.Delete($@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched");
-                }
-                File.Copy(originalFile, $@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched");
-                File.WriteAllBytes(patchedFile, fileContent);
-                if (tmp != "null")
-                {
-                    File.Delete(tmp);
-                }
-                MessageBox.Show("We patched your game! Enjoy c:");
-            }
-        }
 
         // Intel AVX Patcher Hex
         private static readonly byte[] IntelPatchFind = { 0x55, 0x48, 0x81, 0xEC, 0xA0, 0x00, 0x00, 0x00, 0x0F, 0x29, 0x70, 0xE8 };
         private static readonly byte[] IntelPatchReplace = { 0xC3, 0x48, 0x81, 0xEC, 0xA0, 0x00, 0x00, 0x00, 0x0F, 0x29, 0x70, 0xE8 };
+
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool IntelDetectPatch(byte[] sequence, int position)
+        private static bool DetectPatch(byte[] sequence, int position, byte[] PatchFind)
         {
-            if (position + IntelPatchFind.Length > sequence.Length) return false;
-            for (int p = 0; p < IntelPatchFind.Length; p++)
+            if (position + PatchFind.Length > sequence.Length) return false;
+            for (int p = 0; p < PatchFind.Length; p++)
             {
-                if (IntelPatchFind[p] != sequence[position + p]) return false;
+                if (PatchFind[p] != sequence[position + p]) return false;
             }
             return true;
         }
 
-        //Intel AVX Patching
-        private static void IntelPatchFile(string originalFile, string patchedFile)
+        private static void PatchFile(string originalFile, string patchedFile, byte[] PatchFind, byte[] PatchReplace)
         {
             // Ensure target directory exists.
             var targetDirectory = Path.GetDirectoryName(patchedFile);
@@ -191,11 +133,11 @@ namespace Cyberpunk2077_PerformancePatcher
             bool foundPatch = false;
             for (int p = 0; p < fileContent.Length; p++)
             {
-                if (!IntelDetectPatch(fileContent, p)) continue;
+                if (!DetectPatch(fileContent, p, PatchFind)) continue;
                 foundPatch = true;
-                for (int w = 0; w < IntelPatchFind.Length; w++)
+                for (int w = 0; w < PatchFind.Length; w++)
                 {
-                    fileContent[p + w] = IntelPatchReplace[w];
+                    fileContent[p + w] = PatchReplace[w];
                 }
             }
 
@@ -205,23 +147,8 @@ namespace Cyberpunk2077_PerformancePatcher
                 MessageBox.Show("We couldn't patch your game. Perhaps you already ran the patcher?\n\nDouble check your path, and try again.");
                 return;
             }
-            if (foundPatch)
-            {
-                string tmp = "null";
-                if (File.Exists($@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched"))
-                {
-                    File.Copy($@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched", $@"{System.IO.Path.GetDirectoryName(originalFile)}\cyber.tmp"); // Copy it to a temp file
-                    tmp = $@"{System.IO.Path.GetDirectoryName(originalFile)}\cyber.tmp";
-                    File.Delete($@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched");
-                }
-                File.Copy(originalFile, $@"{System.IO.Path.GetDirectoryName(originalFile)}\Cyberpunk2077.exe.unpatched");
-                File.WriteAllBytes(patchedFile, fileContent);
-                if (tmp != "null")
-                {
-                    File.Delete(tmp);
-                }
-                MessageBox.Show("We patched your game! Enjoy c:");
-            }
+            File.WriteAllBytes(patchedFile, fileContent);
+            MessageBox.Show("We patched your game! Enjoy c:");
         }
     }
 }
