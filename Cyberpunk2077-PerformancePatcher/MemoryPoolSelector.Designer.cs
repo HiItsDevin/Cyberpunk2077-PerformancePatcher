@@ -33,6 +33,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.PoolGPUTrackBar = new System.Windows.Forms.TrackBar();
             this.PoolCPUText = new System.Windows.Forms.Label();
             this.PoolGPUText = new System.Windows.Forms.Label();
+            this.MemoryPoolPatchButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PoolCPUTackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PoolGPUTrackBar)).BeginInit();
             this.SuspendLayout();
@@ -71,11 +72,21 @@ namespace Cyberpunk2077_PerformancePatcher
             this.PoolGPUText.Text = "Set your PoolGPU Here (Recommended ALL of your VRAM, 100%)";
             this.PoolGPUText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // MemoryPoolPatchButton
+            // 
+            this.MemoryPoolPatchButton.Location = new System.Drawing.Point(12, 106);
+            this.MemoryPoolPatchButton.Name = "MemoryPoolPatchButton";
+            this.MemoryPoolPatchButton.Size = new System.Drawing.Size(360, 23);
+            this.MemoryPoolPatchButton.TabIndex = 2;
+            this.MemoryPoolPatchButton.Text = "Patch";
+            this.MemoryPoolPatchButton.UseVisualStyleBackColor = true;
+            // 
             // MemoryPoolSelector
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 106);
+            this.ClientSize = new System.Drawing.Size(384, 136);
+            this.Controls.Add(this.MemoryPoolPatchButton);
             this.Controls.Add(this.PoolGPUText);
             this.Controls.Add(this.PoolCPUText);
             this.Controls.Add(this.PoolGPUTrackBar);
@@ -96,5 +107,6 @@ namespace Cyberpunk2077_PerformancePatcher
         private System.Windows.Forms.TrackBar PoolGPUTrackBar;
         private System.Windows.Forms.Label PoolCPUText;
         private System.Windows.Forms.Label PoolGPUText;
+        private System.Windows.Forms.Button MemoryPoolPatchButton;
     }
 }
