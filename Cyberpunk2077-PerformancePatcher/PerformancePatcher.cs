@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace Cyberpunk2077_PerformancePatcher
 {
-    public partial class Form1 : Form
+    public partial class PerformancePatcherForm : Form
     {
-        public Form1()
+        public PerformancePatcherForm()
         {
             InitializeComponent();
         }

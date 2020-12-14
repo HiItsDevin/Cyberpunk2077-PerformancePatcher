@@ -16,7 +16,7 @@ namespace Cyberpunk2077_PerformancePatcher
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new PerformancePatcherForm());
         }
     }
 }

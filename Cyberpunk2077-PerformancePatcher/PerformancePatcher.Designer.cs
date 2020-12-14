@@ -1,7 +1,7 @@
 ﻿
 namespace Cyberpunk2077_PerformancePatcher
 {
-    partial class Form1
+    partial class PerformancePatcherForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,6 +29,7 @@ namespace Cyberpunk2077_PerformancePatcher
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PerformancePatcherForm));
             this.AMDpatchButton = new System.Windows.Forms.Button();
             this.browseTextbox = new System.Windows.Forms.TextBox();
             this.infoText = new System.Windows.Forms.Label();
@@ -40,15 +41,19 @@ namespace Cyberpunk2077_PerformancePatcher
             this.IntelAVXPatcherGroupBox = new System.Windows.Forms.GroupBox();
             this.IntelAVXPatcherText = new System.Windows.Forms.Label();
             this.IntelPatchButton = new System.Windows.Forms.Button();
+            this.MemoryPoolPatcherGroupBox = new System.Windows.Forms.GroupBox();
+            this.MemoryPoolPatcherText = new System.Windows.Forms.Label();
+            this.MemoryPoolPatcherButton = new System.Windows.Forms.Button();
             this.AMDGroupBox.SuspendLayout();
             this.IntelAVXPatcherGroupBox.SuspendLayout();
+            this.MemoryPoolPatcherGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // AMDpatchButton
             // 
             this.AMDpatchButton.Location = new System.Drawing.Point(6, 46);
             this.AMDpatchButton.Name = "AMDpatchButton";
-            this.AMDpatchButton.Size = new System.Drawing.Size(345, 23);
+            this.AMDpatchButton.Size = new System.Drawing.Size(370, 23);
             this.AMDpatchButton.TabIndex = 1;
             this.AMDpatchButton.Text = "Patch Game with AMD Patcher";
             this.AMDpatchButton.UseVisualStyleBackColor = true;
@@ -56,15 +61,15 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             // browseTextbox
             // 
-            this.browseTextbox.Location = new System.Drawing.Point(12, 26);
+            this.browseTextbox.Location = new System.Drawing.Point(15, 25);
             this.browseTextbox.Name = "browseTextbox";
             this.browseTextbox.ReadOnly = true;
-            this.browseTextbox.Size = new System.Drawing.Size(204, 20);
+            this.browseTextbox.Size = new System.Drawing.Size(226, 20);
             this.browseTextbox.TabIndex = 1;
             // 
             // infoText
             // 
-            this.infoText.Location = new System.Drawing.Point(12, 9);
+            this.infoText.Location = new System.Drawing.Point(26, 9);
             this.infoText.Name = "infoText";
             this.infoText.Size = new System.Drawing.Size(360, 14);
             this.infoText.TabIndex = 2;
@@ -74,7 +79,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // browseButton
             // 
             this.browseButton.AutoSize = true;
-            this.browseButton.Location = new System.Drawing.Point(222, 24);
+            this.browseButton.Location = new System.Drawing.Point(247, 23);
             this.browseButton.Name = "browseButton";
             this.browseButton.Size = new System.Drawing.Size(150, 23);
             this.browseButton.TabIndex = 0;
@@ -84,7 +89,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             // contactText
             // 
-            this.contactText.Location = new System.Drawing.Point(12, 96);
+            this.contactText.Location = new System.Drawing.Point(26, 97);
             this.contactText.Name = "contactText";
             this.contactText.Size = new System.Drawing.Size(360, 17);
             this.contactText.TabIndex = 4;
@@ -93,7 +98,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             // openSourcedText
             // 
-            this.openSourcedText.Location = new System.Drawing.Point(12, 49);
+            this.openSourcedText.Location = new System.Drawing.Point(26, 49);
             this.openSourcedText.Name = "openSourcedText";
             this.openSourcedText.Size = new System.Drawing.Size(360, 29);
             this.openSourcedText.TabIndex = 4;
@@ -105,7 +110,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             this.AMDPatcherText.Location = new System.Drawing.Point(6, 16);
             this.AMDPatcherText.Name = "AMDPatcherText";
-            this.AMDPatcherText.Size = new System.Drawing.Size(345, 27);
+            this.AMDPatcherText.Size = new System.Drawing.Size(370, 27);
             this.AMDPatcherText.TabIndex = 4;
             this.AMDPatcherText.Text = "Disables the Intel C++ Compiler for Cyberpunk 2077, allowing the game to run a bi" +
     "t better on AMD systems.";
@@ -117,7 +122,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.AMDGroupBox.Controls.Add(this.AMDpatchButton);
             this.AMDGroupBox.Location = new System.Drawing.Point(15, 117);
             this.AMDGroupBox.Name = "AMDGroupBox";
-            this.AMDGroupBox.Size = new System.Drawing.Size(357, 76);
+            this.AMDGroupBox.Size = new System.Drawing.Size(382, 76);
             this.AMDGroupBox.TabIndex = 5;
             this.AMDGroupBox.TabStop = false;
             this.AMDGroupBox.Text = "AMD Patcher";
@@ -128,7 +133,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.IntelAVXPatcherGroupBox.Controls.Add(this.IntelPatchButton);
             this.IntelAVXPatcherGroupBox.Location = new System.Drawing.Point(15, 199);
             this.IntelAVXPatcherGroupBox.Name = "IntelAVXPatcherGroupBox";
-            this.IntelAVXPatcherGroupBox.Size = new System.Drawing.Size(357, 90);
+            this.IntelAVXPatcherGroupBox.Size = new System.Drawing.Size(382, 90);
             this.IntelAVXPatcherGroupBox.TabIndex = 5;
             this.IntelAVXPatcherGroupBox.TabStop = false;
             this.IntelAVXPatcherGroupBox.Text = "Intel AVX Patcher";
@@ -137,7 +142,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             this.IntelAVXPatcherText.Location = new System.Drawing.Point(6, 16);
             this.IntelAVXPatcherText.Name = "IntelAVXPatcherText";
-            this.IntelAVXPatcherText.Size = new System.Drawing.Size(345, 41);
+            this.IntelAVXPatcherText.Size = new System.Drawing.Size(370, 40);
             this.IntelAVXPatcherText.TabIndex = 4;
             this.IntelAVXPatcherText.Text = "Disables the Intel AVX Check, allowing people who don\'t have proper support for A" +
     "VX, or have an older Intel CPU without AVX support, to be able to play without t" +
@@ -146,20 +151,52 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             // IntelPatchButton
             // 
-            this.IntelPatchButton.Location = new System.Drawing.Point(6, 60);
+            this.IntelPatchButton.Location = new System.Drawing.Point(6, 59);
             this.IntelPatchButton.Name = "IntelPatchButton";
-            this.IntelPatchButton.Size = new System.Drawing.Size(345, 23);
+            this.IntelPatchButton.Size = new System.Drawing.Size(370, 23);
             this.IntelPatchButton.TabIndex = 2;
             this.IntelPatchButton.Text = "Patch Game with Intel AVX Patcher";
             this.IntelPatchButton.UseVisualStyleBackColor = true;
             this.IntelPatchButton.Click += new System.EventHandler(this.IntelPatchButton_Click);
             // 
-            // Form1
+            // MemoryPoolPatcherGroupBox
+            // 
+            this.MemoryPoolPatcherGroupBox.Controls.Add(this.MemoryPoolPatcherText);
+            this.MemoryPoolPatcherGroupBox.Controls.Add(this.MemoryPoolPatcherButton);
+            this.MemoryPoolPatcherGroupBox.Location = new System.Drawing.Point(15, 295);
+            this.MemoryPoolPatcherGroupBox.Name = "MemoryPoolPatcherGroupBox";
+            this.MemoryPoolPatcherGroupBox.Size = new System.Drawing.Size(382, 90);
+            this.MemoryPoolPatcherGroupBox.TabIndex = 5;
+            this.MemoryPoolPatcherGroupBox.TabStop = false;
+            this.MemoryPoolPatcherGroupBox.Text = "Memory Pool Patcher";
+            // 
+            // MemoryPoolPatcherText
+            // 
+            this.MemoryPoolPatcherText.Location = new System.Drawing.Point(6, 16);
+            this.MemoryPoolPatcherText.Name = "MemoryPoolPatcherText";
+            this.MemoryPoolPatcherText.Size = new System.Drawing.Size(370, 40);
+            this.MemoryPoolPatcherText.TabIndex = 4;
+            this.MemoryPoolPatcherText.Text = resources.GetString("MemoryPoolPatcherText.Text");
+            this.MemoryPoolPatcherText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // MemoryPoolPatcherButton
+            // 
+            this.MemoryPoolPatcherButton.Enabled = false;
+            this.MemoryPoolPatcherButton.Location = new System.Drawing.Point(6, 59);
+            this.MemoryPoolPatcherButton.Name = "MemoryPoolPatcherButton";
+            this.MemoryPoolPatcherButton.Size = new System.Drawing.Size(370, 23);
+            this.MemoryPoolPatcherButton.TabIndex = 3;
+            this.MemoryPoolPatcherButton.Text = "(Coming Soon) Patch Game with Memory Pool Patcher";
+            this.MemoryPoolPatcherButton.UseVisualStyleBackColor = true;
+            this.MemoryPoolPatcherButton.Click += new System.EventHandler(this.IntelPatchButton_Click);
+            // 
+            // PerformancePatcherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(384, 301);
+            this.ClientSize = new System.Drawing.Size(409, 396);
+            this.Controls.Add(this.MemoryPoolPatcherGroupBox);
             this.Controls.Add(this.IntelAVXPatcherGroupBox);
             this.Controls.Add(this.AMDGroupBox);
             this.Controls.Add(this.contactText);
@@ -169,12 +206,13 @@ namespace Cyberpunk2077_PerformancePatcher
             this.Controls.Add(this.browseTextbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(400, 340);
-            this.MinimumSize = new System.Drawing.Size(400, 340);
-            this.Name = "Form1";
+            this.MaximumSize = new System.Drawing.Size(425, 435);
+            this.MinimumSize = new System.Drawing.Size(425, 435);
+            this.Name = "PerformancePatcherForm";
             this.Text = "Cyberpunk 2077 Performance Patcher";
             this.AMDGroupBox.ResumeLayout(false);
             this.IntelAVXPatcherGroupBox.ResumeLayout(false);
+            this.MemoryPoolPatcherGroupBox.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,6 +231,9 @@ namespace Cyberpunk2077_PerformancePatcher
         private System.Windows.Forms.GroupBox IntelAVXPatcherGroupBox;
         private System.Windows.Forms.Label IntelAVXPatcherText;
         private System.Windows.Forms.Button IntelPatchButton;
+        private System.Windows.Forms.GroupBox MemoryPoolPatcherGroupBox;
+        private System.Windows.Forms.Label MemoryPoolPatcherText;
+        private System.Windows.Forms.Button MemoryPoolPatcherButton;
     }
 }
 
