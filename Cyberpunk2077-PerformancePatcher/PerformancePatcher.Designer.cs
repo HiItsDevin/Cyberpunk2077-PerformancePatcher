@@ -44,6 +44,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.MemoryPoolPatcherGroupBox = new System.Windows.Forms.GroupBox();
             this.MemoryPoolPatcherText = new System.Windows.Forms.Label();
             this.MemoryPoolPatcherButton = new System.Windows.Forms.Button();
+            this.statusMessage = new System.Windows.Forms.Label();
             this.AMDGroupBox.SuspendLayout();
             this.IntelAVXPatcherGroupBox.SuspendLayout();
             this.MemoryPoolPatcherGroupBox.SuspendLayout();
@@ -89,7 +90,7 @@ namespace Cyberpunk2077_PerformancePatcher
             // 
             // contactText
             // 
-            this.contactText.Location = new System.Drawing.Point(26, 97);
+            this.contactText.Location = new System.Drawing.Point(26, 78);
             this.contactText.Name = "contactText";
             this.contactText.Size = new System.Drawing.Size(360, 17);
             this.contactText.TabIndex = 4;
@@ -190,12 +191,24 @@ namespace Cyberpunk2077_PerformancePatcher
             this.MemoryPoolPatcherButton.UseVisualStyleBackColor = true;
             this.MemoryPoolPatcherButton.Click += new System.EventHandler(this.IntelPatchButton_Click);
             // 
+            // statusMessage
+            // 
+            this.statusMessage.AutoSize = true;
+            this.statusMessage.Location = new System.Drawing.Point(142, 101);
+            this.statusMessage.Name = "statusMessage";
+            this.statusMessage.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.statusMessage.Size = new System.Drawing.Size(123, 13);
+            this.statusMessage.TabIndex = 6;
+            this.statusMessage.Text = "Generic Status Message";
+            this.statusMessage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // PerformancePatcherForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(409, 411);
+            this.Controls.Add(this.statusMessage);
             this.Controls.Add(this.MemoryPoolPatcherGroupBox);
             this.Controls.Add(this.IntelAVXPatcherGroupBox);
             this.Controls.Add(this.AMDGroupBox);
@@ -234,6 +247,7 @@ namespace Cyberpunk2077_PerformancePatcher
         private System.Windows.Forms.GroupBox MemoryPoolPatcherGroupBox;
         private System.Windows.Forms.Label MemoryPoolPatcherText;
         private System.Windows.Forms.Button MemoryPoolPatcherButton;
+        private System.Windows.Forms.Label statusMessage;
     }
 }
 

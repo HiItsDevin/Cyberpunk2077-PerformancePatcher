@@ -3,6 +3,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Security;
 using System.Windows.Forms;
+using CPUInformation;
 
 
 namespace Cyberpunk2077_PerformancePatcher
@@ -12,6 +13,18 @@ namespace Cyberpunk2077_PerformancePatcher
         public PerformancePatcherForm()
         {
             InitializeComponent();
+            if (CPUinfo.GetCpuManufacturer() == "AuthenticAMD")
+            {
+                statusMessage.Text = "We've detected an AMD CPU.";
+            }
+            else if(CPUinfo.GetCpuManufacturer() == "GenuineIntel")
+            {
+                statusMessage.Text = "We've detected an Intel CPU.";
+            }
+            else
+            {
+                statusMessage.Text = "Unknown CPU! What are you running this on? :o";
+            }
         }
 
         private OpenFileDialog openFileDialog1;
@@ -47,7 +60,16 @@ namespace Cyberpunk2077_PerformancePatcher
                 AMDpatchButton.Enabled = false;
                 try
                 {
+                    if(CPUinfo.GetCpuManufacturer() == "GenuineIntel") {
+                        DialogResult cpuQuestion = MessageBox.Show("We've detected an Intel CPU!\n\nAre you sure you want to continue patching? Performance may be worse.", "Intel CPU detected", MessageBoxButtons.YesNo);
+                        if(cpuQuestion == DialogResult.No)
+                        {
+                            AMDpatchButton.Enabled = true;
+                            return;
+                        }
+                    }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, AMDPatchFind, AMDPatchReplace);
+                    statusMessage.Text = "AMD patch completed successfully!";
                 }
                 catch (Exception ex)
                 {
@@ -61,7 +83,7 @@ namespace Cyberpunk2077_PerformancePatcher
                         }
                     }
                     MessageBox.Show($"We were not able to patch your game with AMD Patcher. \nAny changes have been discarded.\n\nError message: {ex.Message}");
-
+                    AMDpatchButton.Enabled = true;
                 }
             }
             else
@@ -76,7 +98,17 @@ namespace Cyberpunk2077_PerformancePatcher
                 IntelPatchButton.Enabled = false;
                 try
                 {
+                    if (CPUinfo.GetCpuManufacturer() == "AuthenticAMD")
+                    {
+                        DialogResult cpuQuestion = MessageBox.Show("We've detected an AMD CPU!\n\nAre you sure you want to continue patching? This check doesn't do much on AMD.", "AMD CPU detected", MessageBoxButtons.YesNo);
+                        if (cpuQuestion == DialogResult.No)
+                        {
+                            IntelPatchButton.Enabled = true;
+                            return;
+                        }
+                    }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, IntelPatchFind, IntelPatchReplace);
+                    statusMessage.Text = "Intel AVX patch completed successfully!";
                 }
                 catch (Exception ex)
                 {
@@ -90,7 +122,7 @@ namespace Cyberpunk2077_PerformancePatcher
                         }
                     }
                     MessageBox.Show($"We were not able to patch your game with AMD Patcher. \nAny changes have been discarded.\n\nError message: {ex.Message}");
-
+                    IntelPatchButton.Enabled = true;
                 }
             }
             else
