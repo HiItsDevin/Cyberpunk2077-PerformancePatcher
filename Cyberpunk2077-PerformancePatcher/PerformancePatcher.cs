@@ -69,7 +69,20 @@ namespace Cyberpunk2077_PerformancePatcher
                         }
                     }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, AMDPatchFind, AMDPatchReplace);
-                    statusMessage.Text = "AMD patch completed successfully!";
+                    statusMessage.Text = "Patch completed successfully!";
+                }
+                catch (System.Security.Authentication.AuthenticationException)
+                {
+                    if (File.Exists($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\Cyberpunk2077.exe.unpatched"))
+                    {
+                        File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\Cyberpunk2077.exe.unpatched");
+                        if (File.Exists($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp"))
+                        {
+                            File.Copy($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp", $@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\Cyberpunk2077.exe.unpatched");
+                            File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp");
+                        }
+                    }
+                    return;
                 }
                 catch (Exception ex)
                 {
@@ -84,6 +97,7 @@ namespace Cyberpunk2077_PerformancePatcher
                     }
                     MessageBox.Show($"We were not able to patch your game with AMD Patcher. \nAny changes have been discarded.\n\nError message: {ex.Message}");
                     AMDpatchButton.Enabled = true;
+                    statusMessage.Text = "Patching failed!";
                 }
             }
             else
@@ -108,7 +122,20 @@ namespace Cyberpunk2077_PerformancePatcher
                         }
                     }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, IntelPatchFind, IntelPatchReplace);
-                    statusMessage.Text = "Intel AVX patch completed successfully!";
+                    statusMessage.Text = "Patch completed successfully!";
+                }
+                catch (System.Security.Authentication.AuthenticationException)
+                {
+                    if (File.Exists($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\Cyberpunk2077.exe.unpatched"))
+                    {
+                        File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\Cyberpunk2077.exe.unpatched");
+                        if (File.Exists($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp"))
+                        {
+                            File.Copy($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp", $@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\Cyberpunk2077.exe.unpatched");
+                            File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp");
+                        }
+                    }
+                    return;
                 }
                 catch (Exception ex)
                 {
@@ -123,6 +150,7 @@ namespace Cyberpunk2077_PerformancePatcher
                     }
                     MessageBox.Show($"We were not able to patch your game with AMD Patcher. \nAny changes have been discarded.\n\nError message: {ex.Message}");
                     IntelPatchButton.Enabled = true;
+                    statusMessage.Text = "Patching failed!";
                 }
             }
             else
@@ -130,7 +158,6 @@ namespace Cyberpunk2077_PerformancePatcher
                 MessageBox.Show("Please select your Cyberpunk2077.exe first!");
             }
         }
-
 
         // AMD Patcher Hex
         private static readonly byte[] AMDPatchFind = { 0x75, 0x30, 0x33, 0xC9, 0xB8, 0x01, 0x00, 0x00, 0x00, 0x0F, 0xA2, 0x8B, 0xC8, 0xC1, 0xF9, 0x08 };
@@ -177,7 +204,7 @@ namespace Cyberpunk2077_PerformancePatcher
             if (!foundPatch)
             {
                 MessageBox.Show("We couldn't patch your game. Perhaps you already ran the patcher?\n\nDouble check your path, and try again.");
-                return;
+                throw new System.Security.Authentication.AuthenticationException("Game already patched!");
             }
             File.WriteAllBytes(patchedFile, fileContent);
             MessageBox.Show("We patched your game! Enjoy c:");
