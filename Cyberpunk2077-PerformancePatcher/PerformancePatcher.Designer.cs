@@ -268,7 +268,7 @@ namespace Cyberpunk2077_PerformancePatcher
             this.MaximumSize = new System.Drawing.Size(425, 450);
             this.MinimumSize = new System.Drawing.Size(425, 450);
             this.Name = "PerformancePatcherForm";
-            this.Text = "[DEV] Cyberpunk 2077 Performance Patcher";
+            this.Text = "Cyberpunk 2077 Performance Patcher";
             this.AMDGroupBox.ResumeLayout(false);
             this.IntelAVXPatcherGroupBox.ResumeLayout(false);
             this.MemoryPoolPatcherGroupBox.ResumeLayout(false);
