@@ -27,7 +27,7 @@ namespace Cyberpunk2077_PerformancePatcher
             }
         }
 
-        private OpenFileDialog openFileDialog1;
+        private OpenFileDialog openFileDialog1; // DIALDOADKALWOWD
 
         private void browseButton_Click(object sender, EventArgs e)
         {
