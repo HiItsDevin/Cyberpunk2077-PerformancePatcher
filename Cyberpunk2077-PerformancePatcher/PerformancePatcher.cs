@@ -69,7 +69,7 @@ namespace Cyberpunk2077_PerformancePatcher
                         }
                     }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, AMDPatchFind, AMDPatchReplace);
-                    statusMessage.Text = "Patch completed successfully!";
+                    statusMessage.Text = "AMD patch completed successfully!";
                 }
                 catch (System.Security.Authentication.AuthenticationException)
                 {
@@ -82,6 +82,7 @@ namespace Cyberpunk2077_PerformancePatcher
                             File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp");
                         }
                     }
+                    statusMessage.Text = "Game was already patched.";
                     return;
                 }
                 catch (Exception ex)
@@ -122,7 +123,7 @@ namespace Cyberpunk2077_PerformancePatcher
                         }
                     }
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, IntelPatchFind, IntelPatchReplace);
-                    statusMessage.Text = "Patch completed successfully!";
+                    statusMessage.Text = "Intel AVX patch completed successfully!";
                 }
                 catch (System.Security.Authentication.AuthenticationException)
                 {
@@ -135,6 +136,7 @@ namespace Cyberpunk2077_PerformancePatcher
                             File.Delete($@"{System.IO.Path.GetDirectoryName(openFileDialog1.FileName)}\cyber.tmp");
                         }
                     }
+                    statusMessage.Text = "Game was already patched.";
                     return;
                 }
                 catch (Exception ex)
