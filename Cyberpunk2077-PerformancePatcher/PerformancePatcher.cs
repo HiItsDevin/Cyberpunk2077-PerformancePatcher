@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Security;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Diagnostics;
 using CPUInformation;
 
 
@@ -36,7 +37,6 @@ namespace Cyberpunk2077_PerformancePatcher
         }
 
         /* Context Menu */
-
         private void intelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             CPUManufacturer = "GenuineIntel";
@@ -101,17 +101,7 @@ namespace Cyberpunk2077_PerformancePatcher
                             return;
                         }
                     }
-                    if ((CPUManufacturer == "GenuineIntel") && (int.Parse($"{CPUinfo.GetCpuCores()}") >= 12))
-                    {
-                        DialogResult cpuQuestion = MessageBox.Show("We've detected more than 12 cores!\n\nAre you sure you want to continue patching? Performance may be worse.", "More than 12 cores detected!", MessageBoxButtons.YesNo);
-                        if (cpuQuestion == DialogResult.No)
-                        {
-                            statusMessage.ForeColor = Color.DarkRed;
-                            statusMessage.Text = "Operation cancelled.";
-                            AMDpatchButton.Enabled = true;
-                            return;
-                        }
-                    }
+
                     PatchFile(openFileDialog1.FileName, openFileDialog1.FileName, AMDPatchFind, AMDPatchReplace);
                     statusMessage.ForeColor = Color.DarkGreen;
                     statusMessage.Text = "AMD patch completed successfully!";
